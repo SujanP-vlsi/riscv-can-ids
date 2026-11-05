@@ -1,0 +1,34 @@
+
+sw/firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00010117          	auipc	sp,0x10
+   4:	00010113          	mv	sp,sp
+   8:	014000ef          	jal	1c <main>
+   c:	0000006f          	j	c <_start+0xc>
+
+00000010 <inspect_can_frame>:
+  10:	00052503          	lw	a0,0(a0)
+  14:	00653513          	sltiu	a0,a0,6
+  18:	00008067          	ret
+
+0000001c <main>:
+  1c:	05c00793          	li	a5,92
+  20:	0207a703          	lw	a4,32(a5)
+  24:	0107a683          	lw	a3,16(a5)
+  28:	fd010113          	addi	sp,sp,-48 # ffd0 <IDS_RESULT_REG+0xff44>
+  2c:	02e12023          	sw	a4,32(sp)
+  30:	00d12823          	sw	a3,16(sp)
+  34:	200007b7          	lui	a5,0x20000
+  38:	00100713          	li	a4,1
+  3c:	00e7a023          	sw	a4,0(a5) # 20000000 <_stack_top+0x1fff0000>
+  40:	01012703          	lw	a4,16(sp)
+  44:	00673713          	sltiu	a4,a4,6
+  48:	00e7a023          	sw	a4,0(a5)
+  4c:	02012703          	lw	a4,32(sp)
+  50:	00673713          	sltiu	a4,a4,6
+  54:	00e7a023          	sw	a4,0(a5)
+  58:	0000006f          	j	58 <main+0x3c>
