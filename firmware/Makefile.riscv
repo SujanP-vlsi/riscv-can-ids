@@ -1,0 +1,33 @@
+RISCV_PREFIX ?= riscv32-unknown-elf-
+CC      = $(RISCV_PREFIX)gcc
+OBJCOPY = $(RISCV_PREFIX)objcopy
+OBJDUMP = $(RISCV_PREFIX)objdump
+
+CFLAGS  = -march=rv32imc -mabi=ilp32 -O2 -nostartfiles -T firmware/link.ld -I. -Ifirmware/include -Wall
+
+HOST_CC = gcc
+HOST_CFLAGS = -I. -Ifirmware/include -O2 -Wall
+
+all: check_toolchain run_host_isr
+
+check_toolchain:
+	@which $(CC) > /dev/null 2>&1 && make -f firmware/Makefile.riscv firmware.hex || (echo "[NOTE] $(CC) cross-compiler not in PATH. Running host simulation..." && make -f firmware/Makefile.riscv run_host_isr)
+
+firmware.elf: firmware/src/crt0.s firmware/src/main_firmware.c
+	$(CC) $(CFLAGS) firmware/src/crt0.s firmware/src/main_firmware.c -o firmware.elf
+
+firmware.bin: firmware.elf
+	$(OBJCOPY) -O binary firmware.elf firmware.bin
+
+firmware.hex: firmware.bin
+	hexdump -v -e '1/4 "%08x\n"' firmware.bin > firmware.hex
+	@echo "[SUCCESS] Generated firmware.hex boot memory file for BRAM initialization."
+
+run_host_isr: firmware/src/main_firmware.c
+	$(HOST_CC) $(HOST_CFLAGS) firmware/src/main_firmware.c -o build_firmware_isr -lm
+	./build_firmware_isr
+
+clean:
+	rm -rf firmware.elf firmware.bin firmware.hex build_firmware_isr
+
+.PHONY: all check_toolchain run_host_isr clean

@@ -3,28 +3,27 @@ ENTRY(_start)
 
 MEMORY
 {
-  sram (rwx) : ORIGIN = 0x00000000, LENGTH = 64K
+  ram (rwx) : ORIGIN = 0x00000000, LENGTH = 0x4000
 }
 
 SECTIONS
 {
   .text : {
-    *(.text.start)
+    *(.text._start)
     *(.text*)
-  } > sram
+  } > ram
 
   .rodata : {
     *(.rodata*)
-  } > sram
+  } > ram
 
   .data : {
     *(.data*)
-  } > sram
+  } > ram
 
   .bss : {
     *(.bss*)
-    *(COMMON)
-  } > sram
+  } > ram
 
-  _stack_top = ORIGIN(sram) + LENGTH(sram);
+  _stack_top = ORIGIN(ram) + LENGTH(ram);
 }

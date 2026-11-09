@@ -1,0 +1,13 @@
+IVERILOG ?= iverilog
+VVP ?= vvp
+
+all: sim_soc
+
+sim_soc: rtl/simd_mac_unit.sv rtl/riscv_exec_stage.sv rtl/soc_top_axi_lite.sv sim/tb_soc_top.sv
+	$(IVERILOG) -g2012 -o build_tb_soc rtl/simd_mac_unit.sv rtl/riscv_exec_stage.sv rtl/soc_top_axi_lite.sv sim/tb_soc_top.sv
+	$(VVP) build_tb_soc
+
+clean:
+	rm -rf build_tb_soc build_tb_exec obj_dir build_benchmark
+
+.PHONY: all sim_soc clean

@@ -1,8 +1,7 @@
-.section .text.start
+.section .text._start
 .global _start
 
 _start:
     la sp, _stack_top
-    call main
-
+    jal main
 1:  j 1b

@@ -1,0 +1,14 @@
+YOSYS := yosys
+
+export-netlist:
+	$(YOSYS) -s scripts/export_netlist.tcl
+
+analyze-power:
+	python3 scripts/estimate_power.py
+
+run-phase6: export-netlist analyze-power
+
+clean-phase6:
+	rm -rf rtl/ids_synth_netlist.v reports/power_analysis.rpt setup_phase6.py
+
+.PHONY: export-netlist analyze-power run-phase6 clean-phase6

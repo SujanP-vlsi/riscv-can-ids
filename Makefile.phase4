@@ -1,0 +1,15 @@
+VIVADO ?= vivado
+YOSYS  ?= yosys
+
+synth-yosys:
+	@which $(YOSYS) > /dev/null 2>&1 || (echo "[ERROR] Yosys is not installed on this system." && exit 1)
+	$(YOSYS) -s scripts/synth_yosys.tcl
+
+synth-vivado:
+	@which $(VIVADO) > /dev/null 2>&1 || (echo "[ERROR] Vivado toolchain not found in PATH." && exit 1)
+	$(VIVADO) -mode batch -source scripts/synth_vivado.tcl
+
+clean-phase4:
+	rm -rf reports/*.rpt vivado*.log vivado*.jou .Xil setup_phase4.py
+
+.PHONY: synth-yosys synth-vivado clean-phase4

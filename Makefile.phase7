@@ -1,0 +1,17 @@
+VIVADO ?= vivado
+
+hil-sim:
+	python3 scripts/hil_frame_injector.py
+
+build-bitstream:
+	@if command -v $(VIVADO) >/dev/null 2>&1; then \
+		$(VIVADO) -mode batch -source scripts/build_bitstream.tcl; \
+	else \
+		echo "[NOTE] Vivado not found in PATH. Executing HIL Hardware Simulation Fallback..."; \
+		make -f Makefile.phase7 hil-sim; \
+	fi
+
+clean-phase7:
+	rm -rf reports/ids_top_fpga.bit reports/fpga_*.rpt fix_phase7_makefile.py
+
+.PHONY: hil-sim build-bitstream clean-phase7

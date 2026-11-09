@@ -1,0 +1,18 @@
+#ifndef SOC_MEMORY_MAP_H
+#define SOC_MEMORY_MAP_H
+
+#include <stdint.h>
+
+#define BRAM_BASE_ADDR 0x00000000U
+#define CAN_BASE_ADDR  0x40000000U
+#define SPI_BASE_ADDR  0x40001000U
+
+#define CAN_REG_ID     (CAN_BASE_ADDR + 0x00U)
+#define CAN_REG_DLC    (CAN_BASE_ADDR + 0x04U)
+#define CAN_REG_DATA_L (CAN_BASE_ADDR + 0x08U)
+#define CAN_REG_DATA_H (CAN_BASE_ADDR + 0x0CU)
+
+#define SPI_REG_TXDATA (SPI_BASE_ADDR + 0x00U)
+#define SPI_REG_STATUS (SPI_BASE_ADDR + 0x04U)
+
+#endif // SOC_MEMORY_MAP_H

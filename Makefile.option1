@@ -1,0 +1,17 @@
+VERILATOR := verilator
+
+SIM_DIR := sim
+SIM_SV  := $(abspath $(SIM_DIR)/tb_ibex_axi_top.sv)
+SIM_CPP := $(abspath $(SIM_DIR)/tb_ibex_axi_top.cpp)
+
+sim-opt1-build:
+	$(VERILATOR) --trace -Wall -Wno-UNUSEDSIGNAL -Wno-UNDRIVEN -Irtl --top-module tb_ibex_axi_top --cc $(SIM_SV) rtl/ibex_axi_bridge.sv rtl/ids_axi_lite.sv --exe $(SIM_CPP) --Mdir sim/obj_dir_opt1 -o Vtb_ibex_axi_top
+	make -C sim/obj_dir_opt1 -f Vtb_ibex_axi_top.mk Vtb_ibex_axi_top
+
+sim-opt1: sim-opt1-build
+	./sim/obj_dir_opt1/Vtb_ibex_axi_top
+
+clean-opt1:
+	rm -rf sim/obj_dir_opt1 sim/ibex_axi_waveform.vcd setup_option1.py
+
+.PHONY: sim-opt1-build sim-opt1 clean-opt1

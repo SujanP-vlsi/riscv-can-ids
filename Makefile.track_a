@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -I. -Ifirmware/include -O2 -Wall
+
+all: run_pipeline run_c_test
+
+run_pipeline:
+	python3 ml/src/dataset_prep.py
+	python3 ml/src/train_quantize.py
+
+run_c_test: firmware/src/nn_inference.c firmware/src/main.c
+	$(CC) $(CFLAGS) firmware/src/nn_inference.c firmware/src/main.c -o build_c_inference -lm
+	./build_c_inference
+
+clean:
+	rm -rf build_c_inference ml/dataset/*.csv firmware/include/weights.h
+
+.PHONY: all run_pipeline run_c_test clean

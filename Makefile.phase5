@@ -1,0 +1,24 @@
+VERILATOR := verilator
+CC        := gcc
+
+SIM_DIR := sim
+SIM_SV  := $(abspath $(SIM_DIR)/tb_axi_top.sv)
+SIM_CPP := $(abspath $(SIM_DIR)/tb_firmware_cosim.cpp)
+RTL_SV  := $(abspath rtl/ids_axi_lite.sv)
+FIX_LIB := $(abspath sim/lib_atomic_fix)
+
+sim-phase5-build:
+	$(VERILATOR) --trace -Wall -Wno-UNUSEDSIGNAL -Wno-UNDRIVEN -Wno-SYNCASYNCNET -Wno-MULTIDRIVEN \
+		-CFLAGS "-Ifirmware/include -I$(abspath firmware/include)" \
+		-LDFLAGS "-L$(FIX_LIB) -Wl,-rpath,$(FIX_LIB)" \
+		-Irtl -Ifirmware/include --top-module tb_axi_top --prefix Vtb_sva \
+		--cc $(SIM_SV) $(RTL_SV) --exe $(SIM_CPP) --Mdir sim/obj_dir_phase5 -o Vtb_firmware_cosim
+	make -C sim/obj_dir_phase5 -f Vtb_sva.mk Vtb_firmware_cosim
+
+sim-phase5: sim-phase5-build
+	./sim/obj_dir_phase5/Vtb_firmware_cosim
+
+clean-phase5:
+	rm -rf sim/obj_dir_phase5 sim/firmware_cosim.vcd sim/lib_atomic_fix fix_glibc_conflict.py
+
+.PHONY: sim-phase5-build sim-phase5 clean-phase5

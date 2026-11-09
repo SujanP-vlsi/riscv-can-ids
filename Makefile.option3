@@ -1,0 +1,18 @@
+VERILATOR := verilator
+
+SIM_DIR := sim
+SIM_SV  := $(abspath $(SIM_DIR)/tb_axi_top.sv)
+SIM_CPP := $(abspath $(SIM_DIR)/tb_sva.cpp)
+RTL_SV  := $(abspath rtl/ids_axi_lite.sv)
+
+sim-opt3-build:
+	$(VERILATOR) --assert --trace -Wall -Wno-UNUSEDSIGNAL -Wno-UNDRIVEN -Wno-SYNCASYNCNET -Irtl --top-module tb_axi_top --prefix Vtb_sva --cc $(SIM_SV) $(RTL_SV) --exe $(SIM_CPP) --Mdir sim/obj_dir_opt3 -o Vtb_sva
+	make -C sim/obj_dir_opt3 -f Vtb_sva.mk Vtb_sva
+
+sim-opt3: sim-opt3-build
+	./sim/obj_dir_opt3/Vtb_sva
+
+clean-opt3:
+	rm -rf sim/obj_dir_opt3 sim/sva_waveform.vcd fix_syncasyncnet.py
+
+.PHONY: sim-opt3-build sim-opt3 clean-opt3

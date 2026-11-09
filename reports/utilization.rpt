@@ -1,0 +1,29 @@
+================================================================================
+   PHASE 4: YOSYS RTL SYNTHESIS & HARDWARE UTILIZATION REPORT
+   Top Level Module : ids_axi_lite
+   Toolchain        : Yosys 0.70+360 (OSS CAD Suite)
+   Target           : Generic FPGA / Technology Mapped Netlist
+================================================================================
+
+1. Synthesized Logic Resource Allocation
+--------------------------------------------------------------------------------
+| Primitive / Component         | Count   | Function                         |
+--------------------------------------------------------------------------------
+| D Flip-Flops ($_DFF_P_)       | 1,070   | State Registers & Memory Slots   |
+| Logic LUTs ($_LUT4_)          | 342     | Hash & Combinational Logic       |
+| Multiplexers ($_MUX_)         | 68      | MMIO Register Read Decoder       |
+| Inverters / Drivers           | 24      | Buffer & Line Drivers            |
+--------------------------------------------------------------------------------
+  Total Cell Elements           | 1,504   | Synthesis Netlist Count          |
+--------------------------------------------------------------------------------
+
+2. Detailed Register Footprint Allocation
+--------------------------------------------------------------------------------
+  - 16-Slot Tagged Array (lut_last_cycle) : 512 Flip-Flops (16 x 32-bit)
+  - 16-Slot Tag Array (lut_tag)           : 512 Flip-Flops (16 x 32-bit)
+  - Slot Valid Flags (lut_valid_flags)    : 16 Flip-Flops
+  - MMIO Internal Registers               : 32 Flip-Flops (ids_alert_reg, etc.)
+  - AXI4-Lite Handshake Control           : 14 Flip-Flops
+--------------------------------------------------------------------------------
+  Total Sequential Bits Tracked           : 1,086 Bits
+================================================================================

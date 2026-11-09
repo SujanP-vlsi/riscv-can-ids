@@ -1,0 +1,285 @@
+#! /usr/local/bin/vvp
+:ivl_version "14.0 (devel)" "(s20260301-328-geda9fdcd1)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/lib/ivl/v2009.vpi";
+S_0x1b4cf50 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x1b9a0c0 .scope module, "tb_simd_mac" "tb_simd_mac" 3 3;
+ .timescale -9 -12;
+v0x1bb9e50_0 .var/2s "errors", 31 0;
+v0x1bb9f50_0 .var "operand_a", 31 0;
+v0x1bba010_0 .var "operand_b", 31 0;
+v0x1bba110_0 .net "result", 31 0, L_0x1bbbc80;  1 drivers
+S_0x1b81df0 .scope begin, "$ivl_for_loop1" "$ivl_for_loop1" 3 64, 3 64 0, S_0x1b9a0c0;
+ .timescale -9 -12;
+v0x1b82b40_0 .var/2s "t", 31 0;
+S_0x1bb7430 .scope module, "dut" "simd_mac_unit" 3 10, 4 9 0, S_0x1b9a0c0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 32 "operand_a_i";
+    .port_info 1 /INPUT 32 "operand_b_i";
+    .port_info 2 /OUTPUT 32 "result_o";
+v0x1bb8810_0 .net/s *"_ivl_12", 31 0, L_0x1bbb630;  1 drivers
+v0x1bb8910_0 .net/s *"_ivl_14", 31 0, L_0x1bbb780;  1 drivers
+v0x1bb89f0_0 .net/s *"_ivl_17", 31 0, L_0x1bbb870;  1 drivers
+v0x1bb8ab0_0 .net/s *"_ivl_19", 31 0, L_0x1bbb9d0;  1 drivers
+v0x1bb8b90_0 .net/s *"_ivl_22", 31 0, L_0x1bbbb10;  1 drivers
+v0x1bb8cc0_0 .net/s *"_ivl_9", 31 0, L_0x1bbb540;  1 drivers
+v0x1bb8da0 .array "a_val", 3 0;
+v0x1bb8da0_0 .net/s v0x1bb8da0 0, 7 0, L_0x1bba1e0; 1 drivers
+v0x1bb8da0_1 .net/s v0x1bb8da0 1, 7 0, L_0x1bba710; 1 drivers
+v0x1bb8da0_2 .net/s v0x1bb8da0 2, 7 0, L_0x1bbabd0; 1 drivers
+v0x1bb8da0_3 .net/s v0x1bb8da0 3, 7 0, L_0x1bbb060; 1 drivers
+v0x1bb8ee0 .array "b_val", 3 0;
+v0x1bb8ee0_0 .net/s v0x1bb8ee0 0, 7 0, L_0x1bba300; 1 drivers
+v0x1bb8ee0_1 .net/s v0x1bb8ee0 1, 7 0, L_0x1bba7b0; 1 drivers
+v0x1bb8ee0_2 .net/s v0x1bb8ee0 2, 7 0, L_0x1bbac70; 1 drivers
+v0x1bb8ee0_3 .net/s v0x1bb8ee0 3, 7 0, L_0x1bbb100; 1 drivers
+v0x1bb9020_0 .net "operand_a_i", 31 0, v0x1bb9f50_0;  1 drivers
+v0x1bb9100_0 .net "operand_b_i", 31 0, v0x1bba010_0;  1 drivers
+v0x1bb91e0 .array "prod", 3 0;
+v0x1bb91e0_0 .net/s v0x1bb91e0 0, 15 0, L_0x1bba5d0; 1 drivers
+v0x1bb91e0_1 .net/s v0x1bb91e0 1, 15 0, L_0x1bbaa90; 1 drivers
+v0x1bb91e0_2 .net/s v0x1bb91e0 2, 15 0, L_0x1bbaf20; 1 drivers
+v0x1bb91e0_3 .net/s v0x1bb91e0 3, 15 0, L_0x1bbb400; 1 drivers
+v0x1bb9320_0 .net "result_o", 31 0, L_0x1bbbc80;  alias, 1 drivers
+L_0x1bba1e0 .part v0x1bb9f50_0, 0, 8;
+L_0x1bba300 .part v0x1bba010_0, 0, 8;
+L_0x1bba710 .part v0x1bb9f50_0, 8, 8;
+L_0x1bba7b0 .part v0x1bba010_0, 8, 8;
+L_0x1bbabd0 .part v0x1bb9f50_0, 16, 8;
+L_0x1bbac70 .part v0x1bba010_0, 16, 8;
+L_0x1bbb060 .part v0x1bb9f50_0, 24, 8;
+L_0x1bbb100 .part v0x1bba010_0, 24, 8;
+L_0x1bbb540 .extend/s 32, L_0x1bba5d0;
+L_0x1bbb630 .extend/s 32, L_0x1bbaa90;
+L_0x1bbb780 .arith/sum 32, L_0x1bbb540, L_0x1bbb630;
+L_0x1bbb870 .extend/s 32, L_0x1bbaf20;
+L_0x1bbb9d0 .arith/sum 32, L_0x1bbb780, L_0x1bbb870;
+L_0x1bbbb10 .extend/s 32, L_0x1bbb400;
+L_0x1bbbc80 .arith/sum 32, L_0x1bbb9d0, L_0x1bbbb10;
+S_0x1bb7630 .scope generate, "g_simd_mult[0]" "g_simd_mult[0]" 4 22, 4 22 0, S_0x1bb7430;
+ .timescale -9 -12;
+P_0x1bb7850 .param/l "i" 1 4 22, +C4<00>;
+v0x1b82be0_0 .net/s *"_ivl_11", 15 0, L_0x1bba4e0;  1 drivers
+v0x1bb7970_0 .net/s *"_ivl_8", 15 0, L_0x1bba3f0;  1 drivers
+L_0x1bba3f0 .extend/s 16, L_0x1bba1e0;
+L_0x1bba4e0 .extend/s 16, L_0x1bba300;
+L_0x1bba5d0 .arith/mult 16, L_0x1bba3f0, L_0x1bba4e0;
+S_0x1bb7a50 .scope generate, "g_simd_mult[1]" "g_simd_mult[1]" 4 22, 4 22 0, S_0x1bb7430;
+ .timescale -9 -12;
+P_0x1bb7c70 .param/l "i" 1 4 22, +C4<01>;
+v0x1bb7d30_0 .net/s *"_ivl_11", 15 0, L_0x1bba9a0;  1 drivers
+v0x1bb7e10_0 .net/s *"_ivl_8", 15 0, L_0x1bba880;  1 drivers
+L_0x1bba880 .extend/s 16, L_0x1bba710;
+L_0x1bba9a0 .extend/s 16, L_0x1bba7b0;
+L_0x1bbaa90 .arith/mult 16, L_0x1bba880, L_0x1bba9a0;
+S_0x1bb7ef0 .scope generate, "g_simd_mult[2]" "g_simd_mult[2]" 4 22, 4 22 0, S_0x1bb7430;
+ .timescale -9 -12;
+P_0x1bb80f0 .param/l "i" 1 4 22, +C4<010>;
+v0x1bb81b0_0 .net/s *"_ivl_11", 15 0, L_0x1bbae80;  1 drivers
+v0x1bb8290_0 .net/s *"_ivl_8", 15 0, L_0x1bbade0;  1 drivers
+L_0x1bbade0 .extend/s 16, L_0x1bbabd0;
+L_0x1bbae80 .extend/s 16, L_0x1bbac70;
+L_0x1bbaf20 .arith/mult 16, L_0x1bbade0, L_0x1bbae80;
+S_0x1bb8370 .scope generate, "g_simd_mult[3]" "g_simd_mult[3]" 4 22, 4 22 0, S_0x1bb7430;
+ .timescale -9 -12;
+P_0x1bb8570 .param/l "i" 1 4 22, +C4<011>;
+v0x1bb8650_0 .net/s *"_ivl_11", 15 0, L_0x1bbb310;  1 drivers
+v0x1bb8730_0 .net/s *"_ivl_8", 15 0, L_0x1bbb1f0;  1 drivers
+L_0x1bbb1f0 .extend/s 16, L_0x1bbb060;
+L_0x1bbb310 .extend/s 16, L_0x1bbb100;
+L_0x1bbb400 .arith/mult 16, L_0x1bbb1f0, L_0x1bbb310;
+S_0x1bb9480 .scope autofunction.vec4.u32, "ref_simd_mac" "ref_simd_mac" 3 19, 3 19 0, S_0x1b9a0c0;
+ .timescale -9 -12;
+v0x1bb98d0_0 .var "a", 31 0;
+v0x1bb99d0 .array/s "a_b", 3 0, 7 0;
+v0x1bb9a90_0 .var "b", 31 0;
+v0x1bb9b80 .array/s "b_b", 3 0, 7 0;
+; Variable ref_simd_mac is vec4 return value of scope S_0x1bb9480
+v0x1bb9d70_0 .var/s "sum", 31 0;
+TD_tb_simd_mac.ref_simd_mac ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x1bb9d70_0, 0, 32;
+    %fork t_1, S_0x1bb9610;
+    %jmp t_0;
+    .scope S_0x1bb9610;
+t_1 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x1bb97f0_0, 0, 32;
+T_0.0 ; Top of for-loop
+    %load/vec4 v0x1bb97f0_0;
+    %cmpi/s 4, 0, 32;
+	  %jmp/0xz T_0.1, 5;
+    %load/vec4 v0x1bb98d0_0;
+    %load/vec4 v0x1bb97f0_0;
+    %muli 8, 0, 32;
+    %part/s 8;
+    %ix/getv/s 4, v0x1bb97f0_0;
+    %store/vec4a v0x1bb99d0, 4, 0;
+    %load/vec4 v0x1bb9a90_0;
+    %load/vec4 v0x1bb97f0_0;
+    %muli 8, 0, 32;
+    %part/s 8;
+    %ix/getv/s 4, v0x1bb97f0_0;
+    %store/vec4a v0x1bb9b80, 4, 0;
+    %load/vec4 v0x1bb9d70_0;
+    %ix/getv/s 4, v0x1bb97f0_0;
+    %load/vec4a v0x1bb99d0, 4;
+    %pad/s 32;
+    %ix/getv/s 4, v0x1bb97f0_0;
+    %load/vec4a v0x1bb9b80, 4;
+    %pad/s 32;
+    %mul;
+    %add;
+    %store/vec4 v0x1bb9d70_0, 0, 32;
+T_0.2 ; for-loop step statement
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x1bb97f0_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %cast2;
+    %store/vec4 v0x1bb97f0_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ; for-loop exit label
+    %end;
+    .scope S_0x1bb9480;
+t_0 %join;
+    %load/vec4 v0x1bb9d70_0;
+    %ret/vec4 0, 0, 32;  Assign to ref_simd_mac (store_vec4_to_lval)
+    %disable/flow S_0x1bb9480;
+    %end;
+S_0x1bb9610 .scope autobegin, "$ivl_for_loop0" "$ivl_for_loop0" 3 24, 3 24 0, S_0x1bb9480;
+ .timescale -9 -12;
+v0x1bb97f0_0 .var/2s "k", 31 0;
+    .scope S_0x1b9a0c0;
+T_1 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x1bb9e50_0, 0, 32;
+    %end;
+    .thread T_1, $init;
+    .scope S_0x1b9a0c0;
+T_2 ;
+    %vpi_call/w 3 33 "$display", "==========================================================================" {0 0 0};
+    %vpi_call/w 3 34 "$display", "   PHASE 2 / TRACK B: SIMD MAC HARDWARE EXECUTION UNIT RTL TESTBENCH     " {0 0 0};
+    %vpi_call/w 3 35 "$display", "==========================================================================" {0 0 0};
+    %pushi/vec4 184226818, 0, 32;
+    %store/vec4 v0x1bb9f50_0, 0, 32;
+    %pushi/vec4 50658828, 0, 32;
+    %store/vec4 v0x1bba010_0, 0, 32;
+    %delay 10000, 0;
+    %load/vec4 v0x1bba110_0;
+    %cmpi/e 4294967290, 0, 32;
+    %jmp/0xz  T_2.0, 6;
+    %load/vec4 v0x1bba110_0;
+    %vpi_call/w 3 45 "$display", "[PASS Test 1] Known Operands -> Result: %d (Expected: -6)", S<0,vec4,s32> {1 0 0};
+    %jmp T_2.1;
+T_2.0 ;
+    %load/vec4 v0x1bba110_0;
+    %vpi_call/w 3 47 "$display", "[FAIL Test 1] Result: %d (Expected: -6)", S<0,vec4,s32> {1 0 0};
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x1bb9e50_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %cast2;
+    %store/vec4 v0x1bb9e50_0, 0, 32;
+T_2.1 ;
+    %pushi/vec4 2139062143, 0, 32;
+    %store/vec4 v0x1bb9f50_0, 0, 32;
+    %pushi/vec4 2139062143, 0, 32;
+    %store/vec4 v0x1bba010_0, 0, 32;
+    %delay 10000, 0;
+    %load/vec4 v0x1bba110_0;
+    %cmpi/e 64516, 0, 32;
+    %jmp/0xz  T_2.2, 6;
+    %load/vec4 v0x1bba110_0;
+    %vpi_call/w 3 57 "$display", "[PASS Test 2] Max Bounds -> Result: %d (Expected: 64516)", S<0,vec4,s32> {1 0 0};
+    %jmp T_2.3;
+T_2.2 ;
+    %load/vec4 v0x1bba110_0;
+    %vpi_call/w 3 59 "$display", "[FAIL Test 2] Result: %d", S<0,vec4,s32> {1 0 0};
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x1bb9e50_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %cast2;
+    %store/vec4 v0x1bb9e50_0, 0, 32;
+T_2.3 ;
+    %fork t_3, S_0x1b81df0;
+    %jmp t_2;
+    .scope S_0x1b81df0;
+t_3 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x1b82b40_0, 0, 32;
+T_2.4 ; Top of for-loop
+    %load/vec4 v0x1b82b40_0;
+    %cmpi/s 100, 0, 32;
+	  %jmp/0xz T_2.5, 5;
+    %vpi_func 3 65 "$random" 32 {0 0 0};
+    %store/vec4 v0x1bb9f50_0, 0, 32;
+    %vpi_func 3 66 "$random" 32 {0 0 0};
+    %store/vec4 v0x1bba010_0, 0, 32;
+    %delay 10000, 0;
+    %load/vec4 v0x1bba110_0;
+    %alloc S_0x1bb9480;
+    %load/vec4 v0x1bb9f50_0;
+    %load/vec4 v0x1bba010_0;
+    %store/vec4 v0x1bb9a90_0, 0, 32;
+    %store/vec4 v0x1bb98d0_0, 0, 32;
+    %callf/vec4 TD_tb_simd_mac.ref_simd_mac, S_0x1bb9480;
+    %free S_0x1bb9480;
+    %cmp/ne;
+    %jmp/0xz  T_2.7, 6;
+    %load/vec4 v0x1bba110_0;
+    %alloc S_0x1bb9480;
+    %load/vec4 v0x1bb9f50_0;
+    %load/vec4 v0x1bba010_0;
+    %store/vec4 v0x1bb9a90_0, 0, 32;
+    %store/vec4 v0x1bb98d0_0, 0, 32;
+    %callf/vec4 TD_tb_simd_mac.ref_simd_mac, S_0x1bb9480;
+    %free S_0x1bb9480;
+    %vpi_call/w 3 69 "$display", "[FAIL Random Test %0d] A=0x%0h B=0x%0h RTL=%d Ref=%d", v0x1b82b40_0, v0x1bb9f50_0, v0x1bba010_0, S<1,vec4,s32>, S<0,vec4,s32> {2 0 0};
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x1bb9e50_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %cast2;
+    %store/vec4 v0x1bb9e50_0, 0, 32;
+T_2.7 ;
+T_2.6 ; for-loop step statement
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x1b82b40_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %cast2;
+    %store/vec4 v0x1b82b40_0, 0, 32;
+    %jmp T_2.4;
+T_2.5 ; for-loop exit label
+    %end;
+    .scope S_0x1b9a0c0;
+t_2 %join;
+    %vpi_call/w 3 75 "$display", "--------------------------------------------------------------------------" {0 0 0};
+    %load/vec4 v0x1bb9e50_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_2.9, 4;
+    %vpi_call/w 3 77 "$display", "   ALL 102 RTL STIMULUS TESTS PASSED. HARDWARE MAC UNIT VERIFIED." {0 0 0};
+    %jmp T_2.10;
+T_2.9 ;
+    %vpi_call/w 3 79 "$display", "   TEST SUITE FAILED WITH %0d ERRORS.", v0x1bb9e50_0 {0 0 0};
+T_2.10 ;
+    %vpi_call/w 3 81 "$display", "==========================================================================" {0 0 0};
+    %vpi_call/w 3 82 "$finish" {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "sim/tb_simd_mac.sv";
+    "rtl/simd_mac_unit.sv";

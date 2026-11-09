@@ -1,0 +1,18 @@
+VERILATOR := verilator
+
+SIM_DIR := sim
+SIM_SV  := $(abspath $(SIM_DIR)/tb_axi_top.sv)
+SIM_CPP := $(abspath $(SIM_DIR)/tb_multi_id.cpp)
+RTL_SV  := $(abspath rtl/ids_axi_lite.sv)
+
+sim-opt2-build:
+	$(VERILATOR) --trace -Wall -Wno-UNUSEDSIGNAL -Wno-UNDRIVEN -Irtl --top-module tb_axi_top --prefix Vtb_multi_id --cc $(SIM_SV) $(RTL_SV) --exe $(SIM_CPP) --Mdir sim/obj_dir_opt2 -o Vtb_multi_id
+	make -C sim/obj_dir_opt2 -f Vtb_multi_id.mk Vtb_multi_id
+
+sim-opt2: sim-opt2-build
+	./sim/obj_dir_opt2/Vtb_multi_id
+
+clean-opt2:
+	rm -rf sim/obj_dir_opt2 sim/multi_id_waveform.vcd fix_phase2.py
+
+.PHONY: sim-opt2-build sim-opt2 clean-opt2
